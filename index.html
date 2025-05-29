@@ -1,137 +1,134 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eu te amo 💖</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eu Te Amo</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: black;
-      color: #ff69b4;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #c70039;
+      font-family: 'Arial', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       overflow: hidden;
       text-align: center;
       position: relative;
     }
 
-    h1 {
+    h1, p {
       margin: 20px;
-      font-size: 1.5em;
-      max-width: 90%;
+      max-width: 700px;
+    }
+
+    #botao {
+      margin-top: 40px;
+      padding: 12px 24px;
+      background-color: #c70039;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #botao:hover {
+      transform: scale(1.1);
     }
 
     .heart {
-      width: 20px;
-      height: 20px;
-      background-color: #ff69b4;
       position: absolute;
-      top: -10px;
-      left: 50%;
-      animation: fall linear infinite;
+      width: 10px;
+      height: 10px;
+      background: #c70039;
       transform: rotate(45deg);
+      animation: fall 4s linear infinite;
     }
 
     .heart::before,
     .heart::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background-color: #ff69b4;
-      border-radius: 50%;
+      content: '';
       position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #c70039;
+      border-radius: 50%;
     }
 
     .heart::before {
-      top: -10px;
+      top: -5px;
       left: 0;
     }
 
     .heart::after {
-      left: -10px;
       top: 0;
+      left: -5px;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(-100px) rotate(45deg);
+        top: -10%;
         opacity: 1;
       }
       100% {
-        transform: translateY(100vh) rotate(45deg);
+        top: 110%;
         opacity: 0;
       }
     }
 
-    button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 1em;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .explosion {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background-color: #ff69b4;
-      border-radius: 50%;
+    #explosao {
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      animation: explode 0.4s ease-out forwards;
-      z-index: 10;
+      font-size: 100px;
+      color: #c70039;
+      opacity: 0;
+      transition: all 0.4s ease-out;
     }
 
-    @keyframes explode {
-      to {
-        transform: translate(-50%, -50%) scale(4);
-        opacity: 0;
-      }
+    .explodir {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <h1>
-    Oii, meu amor.<br><br>
-   
-Fiz este site especialmente para dizer que estes têm sido alguns dos melhores momentos da minha vida. Poder dividir contigo as minhas alegrias, os meus delírios e até as minhas inseguranças me faz sentir profundamente amado e aceito. Obrigado por seres exatamente quem és — doce, divertida, acolhedora e incrivelmente única.
+  <h1>Oii meu amor</h1>
+  <p>
+    Fiz este site especialmente para dizer que estes têm sido alguns dos melhores momentos da minha vida.<br>
+    Poder dividir contigo as minhas alegrias, os meus delírios e até as minhas inseguranças me faz sentir profundamente amado e aceito.<br>
+    Obrigado por seres exatamente quem és — doce, divertida, acolhedora e incrivelmente única.<br><br>
+    Quero que isso dure para sempre. Eu sei que teremos altos e baixos, e que a vida não é um mar de rosas...<br>
+    mas se for contigo, até os dias difíceis se tornam suportáveis. Porque estar contigo é estar em casa.<br><br>
+    Eu te amo, sua doida, do fundo de my heart. ❤️
+  </p>
 
-Quero que isso dure para sempre. Eu sei que teremos altos e baixos, e que a vida não é um mar de rosas... mas se for contigo, até os dias difíceis se tornam suportáveis. Porque estar contigo é estar em casa.
+  <button id="botao">Se gostou clique aqui</button>
 
-Eu te amo, sua doida, do fundo de my heart 🩷
-  </h1>
-  <button onclick="showExplosion()">Se você me ama, clica aqui 💖</button>
-  <div id="explosionContainer"></div>
+  <div id="explosao">❤️</div>
+
   <script>
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(createHeart, 500);
+    const botao = document.getElementById('botao');
+    const explosao = document.getElementById('explosao');
 
-    function showExplosion() {
-      const explosion = document.createElement('div');
-      explosion.className = 'explosion';
-      document.getElementById('explosionContainer').appendChild(explosion);
-      setTimeout(() => explosion.remove(), 400);
-    }
+    botao.addEventListener('click', () => {
+      explosao.classList.add('explodir');
+      for (let i = 0; i < 100; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    });
   </script>
 </body>
 </html>
